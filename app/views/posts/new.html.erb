@@ -1,0 +1,40 @@
+<!-- <h4>Pure HTML form</h4>
+<form action='/posts' method='POST' >
+	Title: <input type='text' name='my_title'/>
+	</br>
+	<input type ='submit' class='btn btn-primary'>
+</form>
+
+<h4>Rails form helpers</h4>
+<%= form_tag '/posts' do %>
+	<%= label_tag :title %>
+	<%= text_field_tag :title %>
+	</br>
+	<%= submit_tag 'Create Post', class: 'btn btn-primary' %>
+<% end %>
+ -->
+
+
+ <!-- Rails model-backed form helpers -->
+<h4>Create a post</h4>
+
+<% if @post.errors.any? %>
+	<div class='alert alert-error'>
+		<h5>There were some errors:</h5>
+		<ul>
+			<% @post.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<%= form_for @post do |f| %>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+	</br>
+	<%= f.label :url %>
+	<%= f.text_field :url %>
+	</br>
+	<%= f.submit 'Create Post', class: 'btn btn-primary' %>
+<% end %>
