@@ -17,7 +17,7 @@
 
  <!-- Rails model-backed form helpers -->
 <h4>Create a post</h4>
-
+<!-- 
 <% if @post.errors.any? %>
 	<div class='alert alert-error'>
 		<h5>There were some errors:</h5>
@@ -37,4 +37,6 @@
 	<%= f.text_field :url %>
 	</br>
 	<%= f.submit 'Create Post', class: 'btn btn-primary' %>
-<% end %>
+<% end %> -->
+
+<%= render 'form' %>
