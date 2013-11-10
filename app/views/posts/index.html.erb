@@ -3,10 +3,33 @@
 <p>This is the Postit template. You've access the PostsController, index action. This is the index template. Find me under app/views/posts folder.</p>
  -->
 
- <h4>All posts!</h4>
+ <!-- <h4>All posts!</h4>
 
  <ul>
  	<% @posts.each do |post| %>
  		<li><%= link_to post.title, post_path(post) %>(<%= link_to 'edit', edit_post_path(post) %>)</li>
  	<% end %>
- </ul>
+ </ul> -->
+
+<p class="lead"> 
+	All Post
+	</hr>
+</p>
+
+<% @posts.each do |post| %>
+	<div class="row">
+ 		<div class="span8 well">
+ 			<h4><%= link_to post.title, post.url %></h4>
+ 			<p><%= post.description %></p>
+ 			<p>
+ 				<span class="quiet">posted by </span><%= post.creator.username %>
+ 				<small>at <%= post.created_at %></small>
+ 			</p>
+ 			<small>
+ 				<span>
+ 					<%= link_to("#{post.comments.size} comments", post_path(post)) %>
+ 				</span>
+ 			</small>
+ 		</div>
+ 	</div>
+<% end %>
