@@ -9,6 +9,10 @@
 	<%= f.submit "Create Comment", class: "btn btn-primary" %>
 <% end %> -->
 
+<p class= 'pull-right'>
+	[<%= link_to 'edit this post', edit_post_path(@post) %>] 
+</p>
+
 <p>
 	<%= render @post.categories %>
 </p>

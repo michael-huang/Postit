@@ -43,6 +43,8 @@
 
 <!-- -------------------------------------------------------------------- -->
 
+<%= render 'shared/content_title', title: 'Create a new post' %>
+
 <% if @post.errors.any? %>
 	<div class="row">
 		<div class='alert alert-error span8'>
@@ -56,7 +58,6 @@
 	</div>
 <% end %>
 
-<%= render 'shared/content_title', title: 'Create a new post' %>
 <div class="well">
 	<%= form_for @post do |f| %>
 		<div class="control-group">
@@ -74,8 +75,3 @@
 		<%= f.submit 'Create Post', class: 'btn btn-primary' %>
 	<% end %>
 </div>
-
-
-
-
-
