@@ -1,4 +1,4 @@
-<h4>Hi there, you're viewing <%= @post.title %></h4>
+<!-- <h4>Hi there, you're viewing <%= @post.title %></h4>
 
 <%= link_to 'go back to all posts', posts_path %>
 
@@ -7,4 +7,20 @@
 	<%= f.text_area :body %>
 	</br>
 	<%= f.submit "Create Comment", class: "btn btn-primary" %>
-<% end %>
+<% end %> -->
+
+<p>
+	<% @post.categories.each do |category| %>
+		<span class="badge"><%= category.name %></span>
+	<% end %>
+</p>
+
+<p class="lead"> 
+	<%= @post.title %>
+	</hr>
+</p>
+
+<p>
+<%= @post.description %>
+</p>
+</hr>
