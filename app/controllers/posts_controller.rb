@@ -1,6 +1,12 @@
 class PostsController < ApplicationController
 
+  # There are two purpose for before_action
+  # 1. set up something
+  # 2. redirect away from action
+
   before_action :set_post, only: [:show, :edit, :update]
+  before_action :require_user, except: [:index, :show]
+
   def index
   	@posts = Post.all
   end
@@ -15,7 +21,7 @@ class PostsController < ApplicationController
 
   def create
   	@post = Post.new(post_params)
-    @post.creator = User.first # TODO: change once we have authentication
+    @post.creator = current_user
 
   	if @post.save
   		flash[:notice] = 'Your post was created.'
