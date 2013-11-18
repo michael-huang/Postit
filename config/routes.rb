@@ -14,9 +14,31 @@ PostitTemplate::Application.routes.draw do
   # patch '/posts/:id', to: 'posts@update'	# submit the edition
 
   resources :posts, except: [:destroy] do
-  	resources :comments, only: [:create]
+    member do
+      post :vote
+    end
+
+
+    # collection do
+    #   get :archives # GET /posts/archives
+    # end
+
+  	resources :comments, only: [:create] do
+      member do
+        post :vote
+      end
+    end
   end
 
   resources :categories, only: [:new, :create, :show]
   resources :users, only: [:create]
 end
+
+# Option1:
+# resources :votes, only: [:create]
+# POST /votes => 'VotesController#create'
+#   - needs two pieces of information
+
+# Option2(which we use in the case):
+# POST /posts/3/vote => 'PostdController#vote'
+# POST /comments/4/vote => 'CommentsController#vote'

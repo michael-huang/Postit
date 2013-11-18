@@ -39,12 +39,29 @@
 
 <h5>Comments:</h5>
 <% @post.comments.each do |comment| %>
-	<div class="well span8">
-		<em><%= comment.body %></em>
-		<p>
- 			<span class="quiet">by </span><%= link_to comment.creator.username, '' %>
- 			<small>at <%= display_datetime(comment.created_at) %></small>
- 		</p>
+	<div class="row">
+		<div class= "span0 well text-center">
+			<% if logged_in? %>
+				<%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post' do %>
+					<i class="icon-arrow-up"></i>
+				<% end %>
+				<br/>
+			<% end %>
+			<%= comment.total_votes.to_s + ' votes' %>
+			<% if logged_in? %>
+				<br/>
+				<%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post' do %>
+					<i class="icon-arrow-down"></i>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="well span8">
+			<em><%= comment.body %></em>
+			<p>
+	 			<span class="quiet">by </span><%= link_to comment.creator.username, '' %>
+	 			<small>at <%= display_datetime(comment.created_at) %></small>
+	 		</p>
+		</div>
 	</div>
 <% end %>
 

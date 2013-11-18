@@ -4,11 +4,11 @@ class PostsController < ApplicationController
   # 1. set up something
   # 2. redirect away from action
 
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:index, :show]
 
   def index
-  	@posts = Post.all
+  	@posts = Post.all.sort_by{|x| x.total_votes}.reverse
   end
 
   def show
@@ -42,6 +42,20 @@ class PostsController < ApplicationController
     end
   end
 
+  def vote
+    @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+
+    if @vote.valid?
+      flash[:notice] = "Your vote was counted."
+    else
+      flash[:error] = "You can only vote for <strong>that</strong> once.".html_safe
+    end
+
+    redirect_to :back
+  end
+
+  private
+
 	def post_params
     params.require(:post).permit(:title, :url, :description, category_ids: [])
 		
@@ -49,8 +63,8 @@ class PostsController < ApplicationController
     # params.require(:post).permit!
 	end
 
-def set_post
-  @post = Post.find(params[:id])
-end
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
 end
