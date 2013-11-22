@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 	private
 
 	def user_params
-		params.require(:user).permit(:username, :password)
+		params.require(:user).permit(:username, :password, :time_zone)
 	end
 
 	def set_user
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 	end
 
 	def require_same_user
-		if current_user != @username
+		if current_user != @user
 			flash[:error] = "You are not allowed to do that!"
 			redirect_to root_path
 		end
