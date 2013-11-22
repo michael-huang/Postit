@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
 		self.slug
 	end
 	
+	def admin?
+		self.role.to_s.to_sym == :admin
+	end
+
 end

@@ -9,7 +9,7 @@
 	<%= f.submit "Create Comment", class: "btn btn-primary" %>
 <% end %> -->
 
-<% if logged_in? %>
+<% if logged_in? && (@post.creator == current_user || current_user.admin?) %>
 	<p class= 'pull-right'>
 		[<%= link_to 'edit this post', edit_post_path(@post) %>] 
 	</p>
