@@ -13,6 +13,11 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new
+
+    # # exposing API
+    # respond_to do |format|
+    #   format.html{render json: @post}
+    # end
   end
 
   def new
